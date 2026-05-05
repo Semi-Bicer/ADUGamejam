@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cycqkib1bqqka"]
+
+[ext_resource type="Script" uid="uid://b0s63tha8c5q1" path="res://player.gd" id="1_4flbx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fwpa"]
+size = Vector2(8, 8)
+
+[node name="CharacterBody2D" type="CharacterBody2D" unique_id=781704877]
+script = ExtResource("1_4flbx")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=256475813]
+modulate = Color(0, 1, 1, 1)
+texture_filter = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1811850808]
+shape = SubResource("RectangleShape2D_1fwpa")
+debug_color = Color(1.1551381e-06, 0.59026825, 0.7546174, 0.41960785)
+
+[node name="up" type="RayCast2D" parent="." unique_id=543142274]
+position = Vector2(0, -8)
+target_position = Vector2(0, -8)
+
+[node name="down" type="RayCast2D" parent="." unique_id=848735273]
+position = Vector2(0, 8)
+target_position = Vector2(0, 8)
+
+[node name="left" type="RayCast2D" parent="." unique_id=1276992933]
+position = Vector2(-8, 0)
+target_position = Vector2(-8, 0)
+
+[node name="right" type="RayCast2D" parent="." unique_id=2118641989]
+position = Vector2(8, 0)
+target_position = Vector2(8, 0)
