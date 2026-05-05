@@ -1,26 +1,131 @@
 extends CharacterBody2D
-
-const tile_size: Vector2 = Vector2(16, 16)
+const multiplier = 10
+const pickBoxDistance = 8 * multiplier
+const tile_size: Vector2 = Vector2(16* multiplier, 16* multiplier)
 var sprite_node_pos_tween: Tween
+@onready var pickBox: Area2D = $pickBox
+var equip = false
+var timer = 0 
+var timer_condition = false
+var names : Array
+var picked = false
+var grabbed_cluster: Array = [] # şuan taşınan block/ bıçak
+
+
 
 func _physics_process(delta: float) -> void:
-	if !sprite_node_pos_tween and !sprite_node_pos_tween.is_running():
+	if timer_condition:
+		timer += delta
+	if timer >0.2:
+		pickBox.visible = false
+		timer = 0
+		timer_condition = false
+	
+	if Input.is_action_just_pressed("ui_select"):
+		timer_condition = true
+		pickBox.visible=true
+		for i in pickBox.get_overlapping_bodies():
+			if i.name == "Knife":
+				grab_release(i)
+				break
+			elif "block" in i.name:
+				grab_release(i)
+				break
+	
+	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
 		if Input.is_action_pressed("ui_up") and !$up.is_colliding():
-			pass
+			_move(Vector2(0, -1))
+			
 		if Input.is_action_pressed("ui_down") and !$down.is_colliding():
-			pass
+			_move(Vector2(0, 1))
+			
 		if Input.is_action_pressed("ui_left") and !$left.is_colliding():
-			pass
+			_move(Vector2(-1,0))
+			
+			
 		if Input.is_action_pressed("ui_right") and !$right.is_colliding():
-			pass
+			_move(Vector2(1, 0))
+		
+
+
 
 func _move(dir: Vector2):
 	global_position += dir * tile_size
+	pickBox.global_position =global_position + dir * pickBoxDistance
 	$Sprite2D.global_position -= dir * tile_size
 	
 	if sprite_node_pos_tween:
 		sprite_node_pos_tween.kill()
 	sprite_node_pos_tween = create_tween()
 	sprite_node_pos_tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
-	sprite_node_pos_tween.tween_property($Sprite2D, "global_positio", global_position, 0.185).set_trans(Tween.TRANS_SINE)	
+	sprite_node_pos_tween.tween_property($Sprite2D, "global_position", global_position, 0.185).set_trans(Tween.TRANS_SINE)	
 	
+
+
+
+func get_all_connected_blocks(start_block: StaticBody2D, list: Array = []) -> Array:
+	if start_block in list:
+		return list
+	
+	list.append(start_block)
+	var areas = start_block.get_node("Areas")
+	for area in areas.get_children():
+		var direction = area.name
+		if start_block.slashed_sides[direction]:
+			continue
+		
+		var overlap = area.get_overlapping_bodies()[0]
+		if overlap.is_in_group("blocks"):
+			var opposite_dir = get_opposite_dir(direction)
+			if !overlap.slashed_sides[opposite_dir]:
+				get_all_connected_blocks(overlap, list)
+			
+			
+	
+	return list	
+	
+func get_opposite_dir(dir: String) -> String:
+	match dir:
+		"up": return "down"
+		"down": return "up"
+		"left": return "right"
+		"right": return "left"
+	return ""
+	
+func grab_release(body: Node):
+	if  grabbed_cluster.is_empty():	 #grab
+		if body.is_in_group("knife"):
+			body.queue_free()
+			return # bıçağı çocuk obje olarak ekle 
+		elif body.is_in_group("blocks"):
+			
+			grabbed_cluster = get_all_connected_blocks(body)
+		
+		for item in grabbed_cluster:
+			
+			item.reparent($InventoryPivot, true)
+			item.modulate.a = 0.5
+			
+			# Fizik çakışmalarını kapat
+			if item.has_node("CollisionShape2D"):
+				item.get_node("CollisionShape2D").disabled
+			
+			
+			for block in grabbed_cluster:
+				block.picked = true
+	else:# release
+		for item in grabbed_cluster:
+			
+			item.modulate.a = 1
+			if item.has_node("CollisionShape2D"):
+				print("eşyayı bırak")
+				!item.get_node("CollisionShape2D").disabled
+				item.reparent(get_parent(), true)
+				
+			item.picked = false
+		grabbed_cluster = []
+			
+	
+		
+			
+		

@@ -5,6 +5,9 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1fwpa"]
 size = Vector2(8, 8)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
+size = Vector2(7, 7)
+
 [node name="CharacterBody2D" type="CharacterBody2D" unique_id=781704877]
 script = ExtResource("1_4flbx")
 
@@ -14,20 +17,37 @@ texture_filter = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1811850808]
 shape = SubResource("RectangleShape2D_1fwpa")
-debug_color = Color(1.1551381e-06, 0.59026825, 0.7546174, 0.41960785)
 
 [node name="up" type="RayCast2D" parent="." unique_id=543142274]
 position = Vector2(0, -8)
 target_position = Vector2(0, -8)
+collision_mask = 4
+hit_from_inside = true
 
 [node name="down" type="RayCast2D" parent="." unique_id=848735273]
 position = Vector2(0, 8)
 target_position = Vector2(0, 8)
+collision_mask = 4
+hit_from_inside = true
 
 [node name="left" type="RayCast2D" parent="." unique_id=1276992933]
 position = Vector2(-8, 0)
 target_position = Vector2(-8, 0)
+collision_mask = 4
+hit_from_inside = true
 
 [node name="right" type="RayCast2D" parent="." unique_id=2118641989]
 position = Vector2(8, 0)
 target_position = Vector2(8, 0)
+collision_mask = 4
+hit_from_inside = true
+
+[node name="pickBox" type="Area2D" parent="." unique_id=929827016]
+visible = false
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickBox" unique_id=1962322113]
+shape = SubResource("RectangleShape2D_4flbx")
+
+[node name="InventoryPivot" type="Node2D" parent="." unique_id=1745511088]
