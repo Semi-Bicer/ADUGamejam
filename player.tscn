@@ -1,13 +1,41 @@
-[gd_scene format=3 uid="uid://cycqkib1bqqka"]
+[gd_scene format=3 uid="uid://d17wlajcoe82l"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pughu"]
+[ext_resource type="Script" uid="uid://b0s63tha8c5q1" path="res://player.gd" id="1_4flbx"]
 
-[node name="Knife" type="StaticBody2D" unique_id=1539834674]
-position = Vector2(1, 1)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sh265"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4flbx"]
+
+[node name="Player" type="CharacterBody2D" unique_id=752968843]
+script = ExtResource("1_4flbx")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1687419570]
+shape = SubResource("RectangleShape2D_sh265")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1532975207]
+
+[node name="InventoryPivot" type="Node2D" parent="." unique_id=1092669976]
+
+[node name="pickBox" type="Area2D" parent="." unique_id=125089543]
 collision_layer = 2
+collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=925380199]
-shape = SubResource("RectangleShape2D_pughu")
-debug_color = Color(0.99083215, 0, 0.27920282, 0.41960785)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="pickBox" unique_id=1978876954]
+scale = Vector2(0.7, 0.7)
+shape = SubResource("RectangleShape2D_4flbx")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1359428926]
+[node name="up" type="RayCast2D" parent="." unique_id=1488197724]
+position = Vector2(0, -8)
+target_position = Vector2(0, -8)
+
+[node name="down" type="RayCast2D" parent="." unique_id=249881789]
+position = Vector2(0, 8)
+target_position = Vector2(0, 8)
+
+[node name="left" type="RayCast2D" parent="." unique_id=231601862]
+position = Vector2(-8, 0)
+target_position = Vector2(-8, 0)
+
+[node name="right" type="RayCast2D" parent="." unique_id=728854051]
+position = Vector2(8, 0)
+target_position = Vector2(8, 0)

@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bopq1ngys5yn1"]
 
-[ext_resource type="PackedScene" uid="uid://cycqkib1bqqka" path="res://player.tscn" id="1_f3sb7"]
+[ext_resource type="PackedScene" uid="uid://d17wlajcoe82l" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://bq3w22l84dt1d" path="res://knife.tscn" id="2_fj7yv"]
 [ext_resource type="PackedScene" uid="uid://ctvs4aibhdnqw" path="res://blcok.tscn" id="3_tlwt5"]
 
@@ -8,8 +8,8 @@
 position = Vector2(-2, 18)
 
 [node name="CharacterBody2D" parent="." unique_id=781704877 instance=ExtResource("1_f3sb7")]
-position = Vector2(501, 293)
-scale = Vector2(10, 10)
+position = Vector2(500.99997, 293)
+scale = Vector2(5, 5)
 
 [node name="Knife" parent="." unique_id=1539834674 groups=["knife"] instance=ExtResource("2_fj7yv")]
 position = Vector2(600, 134)
