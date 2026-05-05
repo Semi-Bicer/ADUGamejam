@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://d17wlajcoe82l" path="res://player.tscn" id="1_f3sb7"]
 [ext_resource type="PackedScene" uid="uid://bq3w22l84dt1d" path="res://knife.tscn" id="2_fj7yv"]
-[ext_resource type="PackedScene" uid="uid://ctvs4aibhdnqw" path="res://blcok.tscn" id="3_tlwt5"]
+[ext_resource type="PackedScene" uid="uid://ctvs4aibhdnqw" path="res://block.tscn" id="3_tlwt5"]
 
 [node name="World" type="Node2D" unique_id=10060903]
 position = Vector2(-2, 18)

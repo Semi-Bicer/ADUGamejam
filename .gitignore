@@ -12,3 +12,5 @@ obj/
 # Secrets
 github_token.txt
 *.token
+char/
+puzzletilemap/
