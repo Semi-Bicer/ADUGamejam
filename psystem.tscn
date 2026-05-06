@@ -1,13 +1,45 @@
 [gd_scene format=3 uid="uid://bx53vhy6ntqp5"]
 
-[ext_resource type="Texture2D" uid="uid://5pspdhtoagb2" path="res://icon.svg" id="1_v6wyt"]
+[ext_resource type="Script" uid="uid://7k43ga1g1lwx" path="res://psystem.gd" id="1_i20l6"]
+[ext_resource type="Texture2D" uid="uid://br2bm034rmay" path="res://ghosteffects/ghost1.png" id="1_x17c3"]
+[ext_resource type="Texture2D" uid="uid://dqh1iipdye78a" path="res://ghosteffects/ghost2.png" id="2_i20l6"]
+[ext_resource type="Texture2D" uid="uid://8gej3rlm0agy" path="res://ghosteffects/ghost3.png" id="3_br2nm"]
+[ext_resource type="Texture2D" uid="uid://pbl2gf3ri08s" path="res://ghosteffects/ghost4.png" id="4_74xi4"]
 
 [node name="Node2D" type="Node2D" unique_id=368542233]
+script = ExtResource("1_i20l6")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1464202850]
 position = Vector2(0, 695)
 amount = 2
-texture = ExtResource("1_v6wyt")
+texture = ExtResource("1_x17c3")
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(1920, 20)
+gravity = Vector2(0, -980)
+
+[node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=1347887167]
+position = Vector2(0, 688)
+amount = 2
+texture = ExtResource("2_i20l6")
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(1920, 20)
+gravity = Vector2(0, -980)
+
+[node name="CPUParticles2D3" type="CPUParticles2D" parent="." unique_id=182444455]
+position = Vector2(0, 696)
+amount = 2
+texture = ExtResource("3_br2nm")
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(1920, 20)
+gravity = Vector2(0, -980)
+
+[node name="CPUParticles2D4" type="CPUParticles2D" parent="." unique_id=1627325514]
+position = Vector2(0, 704)
+amount = 2
+texture = ExtResource("4_74xi4")
 lifetime = 2.0
 emission_shape = 3
 emission_rect_extents = Vector2(1920, 20)

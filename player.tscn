@@ -52,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_dw050")
 }],
-"loop": false,
+"loop": true,
 "name": &"anim_down",
 "speed": 5.0
 }, {
@@ -86,7 +86,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_pbfsw")
 }],
-"loop": false,
+"loop": true,
 "name": &"anim_up",
 "speed": 5.0
 }, {
@@ -158,5 +158,6 @@ target_position = Vector2(8, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1801217215]
 sprite_frames = SubResource("SpriteFrames_b26j0")
-animation = &"atk_up"
+animation = &"anim_down"
 autoplay = "anim_side"
+frame_progress = 0.072463475

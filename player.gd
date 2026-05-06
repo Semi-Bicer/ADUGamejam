@@ -97,8 +97,7 @@ func get_opposite_dir(dir: String) -> String:
 func grab_release(body: Node):
 	if  grabbed_cluster.is_empty():	 #grab
 		if body.is_in_group("knife"):
-			body.queue_free()
-			return # bıçağı çocuk obje olarak ekle 
+			body.reparent($InventoryPivot, true)
 		elif body.is_in_group("blocks"):
 			
 			grabbed_cluster = get_all_connected_blocks(body)
@@ -116,6 +115,8 @@ func grab_release(body: Node):
 			for block in grabbed_cluster:
 				block.picked = true
 	else:# release
+		if body.is_in_group("Knife"):
+			body.reparent(get_parent(),true)
 		for item in grabbed_cluster:
 			
 			item.modulate.a = 1
