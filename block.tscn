@@ -1,29 +1,32 @@
 [gd_scene format=3 uid="uid://ctvs4aibhdnqw"]
 
 [ext_resource type="Script" uid="uid://c31ma703qojl5" path="res://block.gd" id="1_c1qg0"]
+[ext_resource type="Texture2D" uid="uid://carmu1cmx5j5f" path="res://puzzletilemap/1.png" id="2_xfwl5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8lkhj"]
-size = Vector2(8, 8)
+size = Vector2(8, 7.2000003)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2eeqm"]
-size = Vector2(8, 4)
+size = Vector2(8, 4.133334)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5epwn"]
-size = Vector2(8, 4)
+size = Vector2(8, 3.3333333)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xncbd"]
-size = Vector2(4, 8)
+size = Vector2(3.9999988, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vp4b8"]
-size = Vector2(4, 8)
+size = Vector2(4.133333, 8)
 
 [node name="block" type="StaticBody2D" unique_id=1364493232 groups=["blocks"]]
-scale = Vector2(10, 10)
+scale = Vector2(15, 15)
 collision_layer = 2
 collision_mask = 4
 script = ExtResource("1_c1qg0")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=581793655]
+position = Vector2(0, 0.5999996)
+scale = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_8lkhj")
 debug_color = Color(0.78431374, 0.5882353, 0, 0.41960785)
 
@@ -35,7 +38,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/up" unique_id=503003472]
-position = Vector2(0, 10)
+position = Vector2(0, -50)
+scale = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_2eeqm")
 debug_color = Color(0.78431374, 0.3529412, 0, 0.41960785)
 
@@ -45,7 +49,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/down" unique_id=1666545748]
-position = Vector2(0, -10)
+position = Vector2(0, 50)
+scale = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_5epwn")
 debug_color = Color(0.78431374, 0.3529412, 0, 0.41960785)
 
@@ -55,7 +60,8 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/left" unique_id=461232464]
-position = Vector2(10, 0)
+position = Vector2(-50, 0)
+scale = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_xncbd")
 debug_color = Color(0.78431374, 0.3529412, 0, 0.41960785)
 
@@ -65,6 +71,11 @@ collision_layer = 2
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Areas/right" unique_id=527880890]
-position = Vector2(-10, 0)
+position = Vector2(50, 0)
+scale = Vector2(12, 12)
 shape = SubResource("RectangleShape2D_vp4b8")
 debug_color = Color(0.78431374, 0.3529412, 0, 0.41960785)
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=87811165]
+texture_filter = 1
+texture = ExtResource("2_xfwl5")

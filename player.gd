@@ -1,7 +1,7 @@
 extends CharacterBody2D
-const multiplier = 10
-const pickBoxDistance = 8 * multiplier
-const tile_size: Vector2 = Vector2(16* multiplier, 16* multiplier)
+const multiplier = 1
+const pickBoxDistance = 108 # sebebi çözünürlüğün katı 
+const tile_size: Vector2 = Vector2(108* multiplier, 108* multiplier)
 var sprite_node_pos_tween: Tween
 @onready var pickBox: Area2D = $pickBox
 var equip = false
@@ -10,6 +10,7 @@ var timer_condition = false
 var names : Array
 var picked = false
 var grabbed_cluster: Array = [] # şuan taşınan block/ bıçak
+var last_dir
 @onready var animated_sprite = $AnimatedSprite2D
 
 
@@ -25,13 +26,16 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("ui_select"):
 		timer_condition = true
 		pickBox.visible=true
-		for i in pickBox.get_overlapping_bodies():
-			if i.name == "Knife":
-				grab_release(i)
-				break
-			elif "block" in i.name:
-				grab_release(i)
-				break
+		if pickBox.has_overlapping_bodies():
+			for i in pickBox.get_overlapping_bodies():
+				if i.name == "Knife":
+					grab_release(i)
+					break
+				elif "block" in i.name:
+					grab_release(i)
+					break
+		else:
+			grab_release(null)
 	
 	if !sprite_node_pos_tween or !sprite_node_pos_tween.is_running():
 		if Input.is_action_pressed("ui_up") and !$up.is_colliding():
@@ -55,7 +59,7 @@ func _move(dir: Vector2):
 	global_position += dir * tile_size
 	pickBox.global_position =global_position + dir * pickBoxDistance
 	$AnimatedSprite2D.global_position -= dir * tile_size
-	
+	last_dir = dir
 	if sprite_node_pos_tween:
 		sprite_node_pos_tween.kill()
 	sprite_node_pos_tween = create_tween()
@@ -76,11 +80,12 @@ func get_all_connected_blocks(start_block: StaticBody2D, list: Array = []) -> Ar
 		if start_block.slashed_sides[direction]:
 			continue
 		
-		var overlap = area.get_overlapping_bodies()[0]
-		if overlap.is_in_group("blocks"):
-			var opposite_dir = get_opposite_dir(direction)
-			if !overlap.slashed_sides[opposite_dir]:
-				get_all_connected_blocks(overlap, list)
+		var overlaps = area.get_overlapping_bodies()
+		for overlap in overlaps:
+			if overlap != start_block and overlap.is_in_group("blocks"):
+				var opposite_dir = get_opposite_dir(direction)
+				if !overlap.slashed_sides[opposite_dir]:
+					get_all_connected_blocks(overlap, list)
 			
 			
 	
@@ -96,39 +101,53 @@ func get_opposite_dir(dir: String) -> String:
 	
 func grab_release(body: Node):
 	if  grabbed_cluster.is_empty():	 #grab
-		if body.is_in_group("knife"):
-			body.reparent($InventoryPivot, true)
-		elif body.is_in_group("blocks"):
+		if body != null:
+			if body.is_in_group("knife"):
+				body.reparent($InventoryPivot, true)
+			elif body.is_in_group("blocks"):
+				
+				grabbed_cluster = get_all_connected_blocks(body)
 			
-			grabbed_cluster = get_all_connected_blocks(body)
+			for item in grabbed_cluster:
+				item.reparent($InventoryPivot, true)
+				item.modulate.a = 0.5
+				# Fizik çakışmalarını kapat
+				if item.has_node("CollisionShape2D"):
+					item.get_node("CollisionShape2D").disabled = true
+				
+				item.picked = true
+	else:# release
+		var world_node = get_parent()
+		print("Blok bırakıldı")
+		if body != null:
+			if body.is_in_group("Knife"):
+				body.reparent(get_parent(),true)
 		
 		for item in grabbed_cluster:
-			
-			item.reparent($InventoryPivot, true)
-			item.modulate.a = 0.5
-			
-			# Fizik çakışmalarını kapat
-			if item.has_node("CollisionShape2D"):
-				item.get_node("CollisionShape2D").disabled
-			
-			
-			for block in grabbed_cluster:
-				block.picked = true
-	else:# release
-		if body.is_in_group("Knife"):
-			body.reparent(get_parent(),true)
-		for item in grabbed_cluster:
-			
-			item.modulate.a = 1
-			if item.has_node("CollisionShape2D"):
-				print("eşyayı bırak")
-				!item.get_node("CollisionShape2D").disabled
-				item.reparent(get_parent(), true)
-				
 			item.picked = false
+			item.modulate.a = 1
+			item.reparent(world_node, true)
+			var snapped_x = round(item.global_position.x / tile_size.x) * (tile_size.x)
+			var snapped_y = round(item.global_position.y / tile_size.y) * (tile_size.y)
+			item.global_position = Vector2(snapped_x, snapped_y)
+			if item.has_node("CollisionShape2D"):
+				item.get_node("CollisionShape2D").disabled = false 
+				
 		grabbed_cluster = []
 			
-	
-		
+
+func perform_slash():
+	var overlaps = pickBox.get_overlapping_bodies()
+	  
+	for body in overlaps:
+		if body.is_in_group("blocks"):
+			var target_side = get_slash_target_side(last_dir)
+			body.apply_cut(target_side)
 			
-		
+func get_slash_target_side(dir: Vector2) -> String:
+	match dir:
+		Vector2.RIGHT: return "down"	
+		Vector2.DOWN:  return "left"
+		Vector2.LEFT:  return "down"
+		Vector2.UP:    return "right"
+	return ""

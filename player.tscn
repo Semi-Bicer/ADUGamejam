@@ -52,7 +52,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("5_dw050")
 }],
-"loop": true,
+"loop": false,
 "name": &"anim_down",
 "speed": 5.0
 }, {
@@ -86,7 +86,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("13_pbfsw")
 }],
-"loop": true,
+"loop": false,
 "name": &"anim_up",
 "speed": 5.0
 }, {
@@ -133,6 +133,7 @@ shape = SubResource("RectangleShape2D_sh265")
 [node name="InventoryPivot" type="Node2D" parent="." unique_id=1092669976]
 
 [node name="pickBox" type="Area2D" parent="." unique_id=125089543]
+scale = Vector2(5, 5)
 collision_layer = 2
 collision_mask = 2
 
@@ -157,7 +158,6 @@ position = Vector2(8, 0)
 target_position = Vector2(8, 0)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1801217215]
+position = Vector2(1, 0)
 sprite_frames = SubResource("SpriteFrames_b26j0")
-animation = &"anim_down"
-autoplay = "anim_side"
-frame_progress = 0.072463475
+animation = &"atk_down"

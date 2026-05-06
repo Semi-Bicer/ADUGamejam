@@ -10,37 +10,37 @@
 script = ExtResource("1_i20l6")
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1464202850]
-position = Vector2(0, 695)
-amount = 2
+position = Vector2(0, 1080)
+amount = 200
 texture = ExtResource("1_x17c3")
-lifetime = 2.0
+lifetime = 6.0
 emission_shape = 3
-emission_rect_extents = Vector2(1920, 20)
-gravity = Vector2(0, -980)
+emission_rect_extents = Vector2(1920, 50)
+gravity = Vector2(0, -200)
 
 [node name="CPUParticles2D2" type="CPUParticles2D" parent="." unique_id=1347887167]
-position = Vector2(0, 688)
-amount = 2
+position = Vector2(0, 1080)
+amount = 200
 texture = ExtResource("2_i20l6")
-lifetime = 2.0
+lifetime = 6.0
 emission_shape = 3
-emission_rect_extents = Vector2(1920, 20)
-gravity = Vector2(0, -980)
+emission_rect_extents = Vector2(1920, 50)
+gravity = Vector2(0, -200)
 
 [node name="CPUParticles2D3" type="CPUParticles2D" parent="." unique_id=182444455]
-position = Vector2(0, 696)
-amount = 2
+position = Vector2(0, 1080)
+amount = 200
 texture = ExtResource("3_br2nm")
-lifetime = 2.0
+lifetime = 6.0
 emission_shape = 3
-emission_rect_extents = Vector2(1920, 20)
-gravity = Vector2(0, -980)
+emission_rect_extents = Vector2(1920, 50)
+gravity = Vector2(0, -200)
 
 [node name="CPUParticles2D4" type="CPUParticles2D" parent="." unique_id=1627325514]
-position = Vector2(0, 704)
-amount = 2
+position = Vector2(0, 1080)
+amount = 200
 texture = ExtResource("4_74xi4")
-lifetime = 2.0
+lifetime = 6.0
 emission_shape = 3
-emission_rect_extents = Vector2(1920, 20)
-gravity = Vector2(0, -980)
+emission_rect_extents = Vector2(1920, 50)
+gravity = Vector2(0, -200)
