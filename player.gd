@@ -52,7 +52,9 @@ func _physics_process(delta: float) -> void:
 			_move(Vector2(1, 0))
 			animated_sprite.play("anim_side")
 			$AnimatedSprite2D.flip_h = false
-
+	
+	if Input.is_action_just_pressed("slash_action"):
+		perform_slash()
 
 
 func _move(dir: Vector2):
@@ -104,6 +106,8 @@ func grab_release(body: Node):
 		if body != null:
 			if body.is_in_group("knife"):
 				body.reparent($InventoryPivot, true)
+				grabbed_cluster = [body]
+				return
 			elif body.is_in_group("blocks"):
 				
 				grabbed_cluster = get_all_connected_blocks(body)
@@ -122,14 +126,21 @@ func grab_release(body: Node):
 		if body != null:
 			if body.is_in_group("Knife"):
 				body.reparent(get_parent(),true)
-		
+		var tilemap = world_node.get_node("TileMapLayer")
 		for item in grabbed_cluster:
+			if item.is_in_group("knife"):
+				item.reparent(world_node, true)
+				break
+			item.reparent(world_node, true)
+			
+			var local_pos = tilemap.to_local(item.global_position)
+			var map_cell = tilemap.local_to_map(local_pos)
+			var snapped_local_pos = tilemap.map_to_local(map_cell)
+			item.global_position = tilemap.to_global(snapped_local_pos)
+			
 			item.picked = false
 			item.modulate.a = 1
-			item.reparent(world_node, true)
-			var snapped_x = round(item.global_position.x / tile_size.x) * (tile_size.x)
-			var snapped_y = round(item.global_position.y / tile_size.y) * (tile_size.y)
-			item.global_position = Vector2(snapped_x, snapped_y)
+			
 			if item.has_node("CollisionShape2D"):
 				item.get_node("CollisionShape2D").disabled = false 
 				
@@ -137,12 +148,22 @@ func grab_release(body: Node):
 			
 
 func perform_slash():
+	var has_knife = false
+	for item in grabbed_cluster:
+		if item.is_in_group("knife"):
+			has_knife = true
+			break
+	if !has_knife:
+		return
+	
 	var overlaps = pickBox.get_overlapping_bodies()
 	  
 	for body in overlaps:
 		if body.is_in_group("blocks"):
 			var target_side = get_slash_target_side(last_dir)
-			body.apply_cut(target_side)
+			if target_side != "":
+				body.apply_cut(target_side)
+				print("Kesilen yön: ", target_side)
 			
 func get_slash_target_side(dir: Vector2) -> String:
 	match dir:

@@ -18,17 +18,15 @@ func get_opposite_dir(dir: String) -> String:
 func apply_cut(side: String):
 	if side == "" or slashed_sides[side]:
 		return 
-	# 1. Kendi yüzeyimizi kes ve rengini değiştir
 	_sever_connection(side)
-	# 2. Komşuyu bul ve onun bağını da çift taraflı kopar
-	var area_node = get_node("Areas/" + side)
-	var opposite_side = get_opposite_dir(side)
 	
-	var overlaps = area_node.get_overlapping_bodies()
-	for overlap in overlaps:
-		if overlap != self and overlap.is_in_group("blocks"):
-			# Komşunun sadece kendi yüzeyini kesmesini sağla (Sonsuz döngüyü engeller)
-			overlap._sever_connection(opposite_side)
+	var area_node = get_node("Areas/" + side)
+	var neighbors = area_node.get_overlapping_bodies()
+	
+	for neighbor in neighbors:
+		if neighbor != self and neighbor.is_in_group("blocks"):
+			var opposite = get_opposite_dir(side)
+			neighbor._sever_connection(opposite)
 
 func _sever_connection(side: String):
 	if slashed_sides[side]:

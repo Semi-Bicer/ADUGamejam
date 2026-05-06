@@ -25,7 +25,7 @@ scale = Vector2(0.5, 0.5)
 
 [node name="Knife" parent="." unique_id=1539834674 instance=ExtResource("2_fj7yv")]
 z_index = 1
-position = Vector2(611, 150)
+position = Vector2(553, 222)
 scale = Vector2(2, 2)
 
 [node name="block3" parent="." unique_id=1364493232 instance=ExtResource("3_tlwt5")]
