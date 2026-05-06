@@ -1,0 +1,72 @@
+[gd_scene format=3 uid="uid://b7gf4b81gsou6"]
+
+[ext_resource type="PackedScene" uid="uid://dw1dv2prr706w" path="res://bigPuzzle.tscn" id="1_oxpwo"]
+[ext_resource type="PackedScene" uid="uid://cpo4ncfa538nx" path="res://puzzle.tscn" id="2_pkfr5"]
+[ext_resource type="PackedScene" uid="uid://ctvs4aibhdnqw" path="res://block.tscn" id="3_owy41"]
+
+[node name="wave3" type="Node2D" unique_id=410676389]
+
+[node name="BigPuzzle" parent="." unique_id=1213981083 instance=ExtResource("1_oxpwo")]
+
+[node name="Puzzle" parent="BigPuzzle" unique_id=1771398679 instance=ExtResource("2_pkfr5")]
+position = Vector2(216, 144)
+
+[node name="Puzzle2" parent="BigPuzzle" unique_id=664448553 instance=ExtResource("2_pkfr5")]
+position = Vector2(324, 144)
+
+[node name="Puzzle3" parent="BigPuzzle" unique_id=1476393992 instance=ExtResource("2_pkfr5")]
+position = Vector2(216, 252)
+
+[node name="Puzzle4" parent="BigPuzzle" unique_id=791707801 instance=ExtResource("2_pkfr5")]
+position = Vector2(324, 252)
+
+[node name="Puzzle5" parent="BigPuzzle" unique_id=562308918 instance=ExtResource("2_pkfr5")]
+position = Vector2(432, 254)
+
+[node name="Puzzle9" parent="BigPuzzle" unique_id=222433391 instance=ExtResource("2_pkfr5")]
+position = Vector2(432, 362)
+
+[node name="Puzzle6" parent="BigPuzzle" unique_id=3282573 instance=ExtResource("2_pkfr5")]
+position = Vector2(432, 144)
+
+[node name="Puzzle7" parent="BigPuzzle" unique_id=1029601971 instance=ExtResource("2_pkfr5")]
+position = Vector2(216, 362)
+
+[node name="Puzzle8" parent="BigPuzzle" unique_id=991021302 instance=ExtResource("2_pkfr5")]
+position = Vector2(324, 362)
+
+[node name="block" parent="." unique_id=1364493232 instance=ExtResource("3_owy41")]
+position = Vector2(756, 378)
+scale = Vector2(1, 1)
+
+[node name="block2" parent="." unique_id=1438381585 instance=ExtResource("3_owy41")]
+position = Vector2(864, 54)
+scale = Vector2(1, 1)
+
+[node name="block3" parent="." unique_id=921111798 instance=ExtResource("3_owy41")]
+position = Vector2(864, 270)
+scale = Vector2(1, 1)
+
+[node name="block4" parent="." unique_id=617316055 instance=ExtResource("3_owy41")]
+position = Vector2(756, 488)
+scale = Vector2(1, 1)
+
+[node name="block5" parent="." unique_id=1255763513 instance=ExtResource("3_owy41")]
+position = Vector2(864, 162)
+scale = Vector2(1, 1)
+
+[node name="block6" parent="." unique_id=695955040 instance=ExtResource("3_owy41")]
+position = Vector2(756, 273)
+scale = Vector2(1, 1)
+
+[node name="block7" parent="." unique_id=276433604 instance=ExtResource("3_owy41")]
+position = Vector2(972, 273)
+scale = Vector2(1, 1)
+
+[node name="block8" parent="." unique_id=1737574448 instance=ExtResource("3_owy41")]
+position = Vector2(972, 379)
+scale = Vector2(1, 1)
+
+[node name="block9" parent="." unique_id=918290221 instance=ExtResource("3_owy41")]
+position = Vector2(972, 162)
+scale = Vector2(1, 1)

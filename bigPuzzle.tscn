@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://dw1dv2prr706w"]
+
+[ext_resource type="Script" uid="uid://bwonx0ral62ia" path="res://big_puzzle.gd" id="1_d2kr8"]
+
+[node name="BigPuzzle" type="Node2D" unique_id=1213981083]
+script = ExtResource("1_d2kr8")
