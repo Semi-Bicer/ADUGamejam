@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bx53vhy6ntqp5"]
+
+[ext_resource type="Texture2D" uid="uid://5pspdhtoagb2" path="res://icon.svg" id="1_v6wyt"]
+
+[node name="Node2D" type="Node2D" unique_id=368542233]
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="." unique_id=1464202850]
+position = Vector2(0, 695)
+amount = 2
+texture = ExtResource("1_v6wyt")
+lifetime = 2.0
+emission_shape = 3
+emission_rect_extents = Vector2(1920, 20)
+gravity = Vector2(0, -980)
