@@ -9,7 +9,6 @@ position = Vector2(-2, 18)
 
 [node name="CharacterBody2D" parent="." unique_id=781704877 instance=ExtResource("1_f3sb7")]
 position = Vector2(500.99997, 293)
-scale = Vector2(5, 5)
 
 [node name="Knife" parent="." unique_id=1539834674 groups=["knife"] instance=ExtResource("2_fj7yv")]
 position = Vector2(600, 134)
