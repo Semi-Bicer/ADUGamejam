@@ -148,6 +148,7 @@ func grab_release(body: Node):
 			
 
 func perform_slash():
+	
 	var has_knife = false
 	for item in grabbed_cluster:
 		if item.is_in_group("knife"):
@@ -157,7 +158,7 @@ func perform_slash():
 		return
 	
 	var overlaps = pickBox.get_overlapping_bodies()
-	  
+
 	for body in overlaps:
 		if body.is_in_group("blocks"):
 			var target_side = get_slash_target_side(last_dir)
